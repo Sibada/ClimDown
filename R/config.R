@@ -17,18 +17,26 @@
         multiyear.window.length=30,
         trace=0.005,
         jitter.factor=0.01,
-        tau=list(pr=1001, tasmax=101, tasmin=101),
-        seasonal=list(pr=TRUE, tasmax=FALSE, tasmin=FALSE),
-        ratio=list(pr=TRUE, tasmax=FALSE, tasmin=FALSE),
+        tau=list(pr=1001, tasmax=101, tasmin=101, tas=101, sfcWind=101,
+                 psl=101, rhs=101, rsds=101, rlds=101),
+        seasonal=list(pr=TRUE, tasmax=FALSE, tasmin=FALSE, tas=FALSE, sfcWind=FALSE,
+                      psl=FALSE, rhs=FALSE, rsds=FALSE, rlds=FALSE),
+        ratio=list(pr=TRUE, tasmax=FALSE, tasmin=FALSE, tas=FALSE, sfcWind=TRUE,
+                   psl=TRUE, rhs=TRUE, rsds=TRUE, rlds=TRUE),
         # Data processing options
         check.units=TRUE,
         check.neg.precip=TRUE,
-        target.units=c(tasmax='celsius', tasmin='celsius', pr='kg m-2 d-1') ##pr='mm day-1')
+        target.units=c(tasmax='celsius', tasmin='celsius', pr='kg m-2 d-1',
+                       tas='celsius', sfcWind='m s-1', psl='kPa', rhs='%',
+                       rsds='W s-1', rlds='W s-1') ##pr='mm day-1')
     )
 
     toset <- !(names(cd.options) %in% names(op))
 
-    if(any(toset)) options(cd.options[toset])
+    if(any(toset)) {
+      message('Configure...')
+      options(cd.options[toset])
+    }
 }
 
 
